@@ -4,7 +4,7 @@ import { getThemeConfig } from '@sugarat/theme/node'
 // 开启RSS支持（RSS配置）
 import type { Theme } from '@sugarat/theme'
 
-const baseUrl = 'https://louaq.gtihub.io'
+const baseUrl = 'https://louaq.github.io'
 const RSS: Theme.RSSOptions = {
    title: 'Louaq',
    baseUrl,
