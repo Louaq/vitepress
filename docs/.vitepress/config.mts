@@ -16,7 +16,7 @@ export default defineConfig({
   base,
   lang: 'zh-cn',
   title: 'Louaq lab',
-  description: '粥里有勺糖的博客主题，基于 vitepress 实现',
+  description: 'Hello World',
   lastUpdated: true,
   // 详见：https://vitepress.dev/zh/reference/site-config#head
   head: [
