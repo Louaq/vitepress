@@ -21,8 +21,8 @@ export default defineConfig({
   // 详见：https://vitepress.dev/zh/reference/site-config#head
   head: [
     // 配置网站的图标（显示在浏览器的 tab 上）
-    // ['link', { rel: 'icon', href: `${base}favicon.ico` }], // 修改了 base 这里也需要同步修改
-    ['link', { rel: 'icon', href: '/favicon.ico' }]
+    // ['link', { rel: 'icon', href: `${base}/docs/public/favicon.ico` }], // 修改了 base 这里也需要同步修改
+    ['link', { rel: 'icon', href: '/vitepress/favicon.svg' }]
   ],
   themeConfig: {
     // 展示 2,3 级标题在目录中
@@ -44,12 +44,13 @@ export default defineConfig({
     // },
     nav: [
       { text: '首页', link: '/' },
-      { text: '关于作者', link: 'https://sugarat.top/aboutme.html' }
+      { text: '关于', link: '/about' },
+      { text: '关于作者', link: 'https://truthtime.netlify.app' }
     ],
     socialLinks: [
       {
         icon: 'github',
-        link: 'https://github.com/ATQQ/sugar-blog/tree/master/packages/theme'
+        link: 'https://github.com/Louaq'
       }
     ]
   }
