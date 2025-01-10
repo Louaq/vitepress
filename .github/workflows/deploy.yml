@@ -59,9 +59,8 @@ jobs:
       - uses: pnpm/action-setup@v4
         name: Install pnpm
         with:
-          version: latest
           # version: 9.15.3
-          run_install: false
+          run_install: false # 使用 package.json 中的版本
 
         # 安装依赖
       - name: Install dependencies
