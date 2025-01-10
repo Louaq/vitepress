@@ -30,6 +30,9 @@ export default defineConfig({
       level: [2, 3],
       label: '目录'
     },
+    search: {
+      provider: 'local'
+    },
     // 默认文案修改
     returnToTopLabel: '回到顶部',
     sidebarMenuLabel: '相关文章',
