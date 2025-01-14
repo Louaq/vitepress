@@ -1,8 +1,6 @@
 import { defineConfig } from 'vitepress'
-
 // 导入主题的配置
 import { blogTheme } from './blog-theme'
-
 // 如果使用 GitHub/Gitee Pages 等公共平台部署
 // 通常需要修改 base 路径，通常为“/仓库名/”
 // 如果项目名已经为 name.github.io 域名，则不需要修改！

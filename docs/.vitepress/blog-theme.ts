@@ -14,7 +14,6 @@ const RSS: Theme.RSSOptions = {
    image: 'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTE2NzAzMA==674995167030',
    favicon: 'https://sugarat.top/favicon.ico',
 }
-
 // 所有配置项，详见文档: https://theme.sugarat.top/
 const blogTheme = getThemeConfig({
    formatShowDate(date) {
@@ -58,6 +57,7 @@ const blogTheme = getThemeConfig({
 
   // 主题色修改
   themeColor: 'el-blue',
+  search: false,
 
   // 文章默认作者
   author: 'Louaq',

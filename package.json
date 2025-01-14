@@ -19,10 +19,13 @@
     "doc": "docs"
   },
   "devDependencies": {
+    "flexsearch": "^0.7.43",
+    "markdown-it": "^14.1.0",
     "pagefind": "^1.1.1",
     "sass": "^1.76.0",
     "typescript": "^5.4.5",
-    "vitepress": "1.5.0"
+    "vitepress": "1.5.0",
+    "vitepress-plugin-search": "1.0.4-alpha.22"
   },
   "pnpm": {
     "peerDependencyRules": {
