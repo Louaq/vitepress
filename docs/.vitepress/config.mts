@@ -12,6 +12,9 @@ export default defineConfig({
   // 继承博客主题(@sugarat/theme)
   extends: blogTheme,
   base,
+  sitemap: {
+    hostname: 'https://louaq.github.io/vitepress/'
+  },
   lang: 'zh-cn',
   title: 'Louaq lab',
   description: 'Hello World',
