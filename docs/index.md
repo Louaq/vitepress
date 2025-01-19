@@ -7,6 +7,7 @@ blog:
  author: Louaq
  logo: /b1.png
  avatarMode: split
+ minScreenAvatar: false
  inspiring:
   - 千万不要因为走得太久，而忘记了我们为什么出发
   - 人生就像一场修行，你不可能一开始就修成正果
