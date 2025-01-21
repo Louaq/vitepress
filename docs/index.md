@@ -17,10 +17,7 @@ blog:
   - 疏影横斜水清浅，暗香浮动月黄昏 
  # 设置 inspiringTimeout 可以实现自动切换
  inspiringTimeout: 3000
- pageSize: 10
+ pageSize: 8
 ---
-
-
-
 
 
