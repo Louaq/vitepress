@@ -1,26 +1,10 @@
 ---
+title: vscode配置Latex环境
 sticky: 999
 top: 1
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 前言
---
 
 **LaTeX** 作为一种强大的排版系统，对于理工科，特别是公式比较多的数学专业（秃头专业），其重要性自不必多说，不在本文探讨范围之内。
 
@@ -40,7 +24,6 @@ top: 1
 注 3： 文末有完整的个人配置代码（有的地方需要更改路径，有具体说明）。
 
 1 TeX Live 下载与安装
-----------------
 
 笔者选用的 Tex 系统是 TeX Live ，如果您想了解 TeX Live 和 MiKTeX 的区别，可以查看此篇文章：[https://www.cnblogs.com/liuliang1999/p/12656706.html](https://www.cnblogs.com/liuliang1999/p/12656706.html)
 

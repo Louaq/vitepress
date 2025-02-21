@@ -49,13 +49,8 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: '关于', link: '/about' },
-      { text: '关于作者', link: 'https://truthtime.netlify.app' }
     ],
     socialLinks: [
-      {
-        icon: 'github',
-        link: 'https://github.com/Louaq'
-      }
     ]
   }
 })

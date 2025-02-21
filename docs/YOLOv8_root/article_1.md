@@ -1,4 +1,5 @@
 ---
+title: YOLOv8简介
 tag:
  - AI
  - YOLO
