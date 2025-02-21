@@ -82,9 +82,9 @@ const blogTheme = getThemeConfig({
 
   // 公告
   popover: {
-    title: '公告',
+    title: '资料源码',
     body: [
-      { type: 'text', content: '<a href="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/YOLOv8.2.zip" style="color: red">资料源码(点击立即下载)</a>' },
+      { type: 'text', content: 'https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/YOLOv8.2.zip' },
     ],
     duration: 0
   },
