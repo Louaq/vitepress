@@ -19,7 +19,7 @@ const blogTheme = getThemeConfig({
    formatShowDate(date) {
     return new Date(date).toLocaleString()
   },
-   comment: {
+  comment: {
     type: 'giscus',
     options: {
       repo: 'Louaq/vitepress',
@@ -29,6 +29,14 @@ const blogTheme = getThemeConfig({
       inputPosition: 'bottom'
     },
     mobileMinify: true
+  },
+  oml2d: {
+    mobileDisplay: true,
+    models: [
+      {
+        path: 'https://registry.npmmirror.com/oml2d-models/latest/files/models/Senko_Normals/senko.model3.json'
+      }
+    ]
   },
   // 开启RSS支持
    RSS,
@@ -84,7 +92,14 @@ const blogTheme = getThemeConfig({
   popover: {
     title: '资料源码',
     body: [
-      { type: 'text', content: 'https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/YOLOv8.2.zip' },
+      {
+        type: 'button',
+        content: '点击下载',
+        props: {
+          type: 'success'
+        },
+        link: 'https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/YOLOv8.2.zip',
+      }
     ],
     duration: 0
   },
