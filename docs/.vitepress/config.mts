@@ -17,7 +17,7 @@ export default defineConfig({
   },
   lang: 'zh-cn',
   title: 'Louaq lab',
-  description: 'Hello World',
+  description: 'Louaq的博客分享网站, 基于 vitepress 实现',
   lastUpdated: true,
   // 详见：https://vitepress.dev/zh/reference/site-config#head
   head: [
