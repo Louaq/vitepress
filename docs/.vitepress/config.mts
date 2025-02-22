@@ -39,6 +39,7 @@ export default defineConfig({
     sidebarMenuLabel: '相关文章',
     lastUpdatedText: '上次更新于',
 
+    
     // 设置logo
     logo: '/logo.png',
     // editLink: {
