@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import { La51Plugin } from 'vitepress-plugin-51la'
 // 导入主题的配置
 import { blogTheme } from './blog-theme'
 // 如果使用 GitHub/Gitee Pages 等公共平台部署
@@ -14,6 +15,14 @@ export default defineConfig({
   base,
   sitemap: {
     hostname: 'https://louaq.github.io/vitepress/'
+  },
+  vite: {
+    plugins: [
+      La51Plugin({
+        id: '3LPXKWn8yDWHfIIJ',
+        ck: '3LPXKWn8yDWHfIIJ'
+      })
+    ]
   },
   lang: 'zh-cn',
   title: 'Louaq lab',
