@@ -1,7 +1,5 @@
 ---
 title: vscode配置Latex环境
-sticky: 999
-top: 4
 ---
 
 前言
