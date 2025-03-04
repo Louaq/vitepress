@@ -1,20 +1,26 @@
 ---
-title: 离线模型蒸馏
-top: 1
-sticky: 999
+title: 在线模型蒸馏
+top: 2
+sticky: 900
 ---
+
+## 一、本文介绍
+
+这篇文章给大家带来的是**模型的蒸馏**，利用教师模型指导学生模型从而进行模型的涨点，本文的内容不仅可以用于论文中，在目前的绝大多数的工作中模型蒸馏是一项非常重要的技术，所以大家可以仔细学习一下本文的内容，本文从YOLOv8的项目文件为例，进行详细的修改教程， **文章内包括完整的修改教程，针对小白我出了视频修改教程，如果你还不会我提供了修改后的文件大家直接运行即可，**所以说不用担心不会适用！**模型蒸馏真正的无损涨点，****蒸馏你只看这一篇文章就足够了，****本文内容为在线蒸馏教程，之前的文章为离线蒸馏！**
+
+
 
 ## 二、蒸馏教程
 
 知识蒸馏的主要方法可以分为三种：基于响应的知识蒸馏（利用教师模型的输出或对最终预测的模仿）、基于特征的知识蒸馏（使用教师模型中间层的特征表示）以及基于关系的知识蒸馏（利用模型内部不同层或不同数据点之间的关系）。每种方法都旨在从大模型中提取有效信息，并通过特定的损失函数将这些信息灌输给学生模型​。
 
-首先，基于模型的知识蒸馏类型包括：
+**首先，基于模型的知识蒸馏类型包括：**
 
 -   1\. 基于响应的蒸馏（Response-based）：使用教师模型的最后输出层的信息（如类别概率）来训练学生模型。
 -   2\. 基于特征的蒸馏（Feature-based）：利用教师模型的中间层特征来指导学生模型。
 -   3\. 基于关系的蒸馏（Relation-based）：侧重于教师模型内不同特征之间的关系，如特征图之间的相互作用。
 
-蒸馏过程的实施方式：
+**蒸馏过程的实施方式：**
 
 -   1\. 在线蒸馏（Online distillation）：教师模型和学生模型同时训练，学生模型实时学习教师模型的知识。
 -   2\. 离线蒸馏（Offline distillation）：先训练教师模型，再使用该模型来训练学生模型，学生模型不会影响教师模型。
@@ -22,6 +28,9 @@ sticky: 999
 
 知识蒸馏是一个多样化的领域，包括各种不同的方法来优化深度学习模型的性能和大小。从基本的基于响应、特征和关系的蒸馏，到更高级的在线、离线和自蒸馏过程，再到特定的技术如对抗性蒸馏或量化蒸馏等，每一种方法都旨在解决不同的问题和需求。
 
+* * *
+
+**PS:** 开始之前给大家说一下，本文的修改内容涉及的改动比较多（我的教程会很详细的写），我也会出一期视频带大家从头到尾修改一遍，如果你还修改不对我也会提供修改完成版本的代码（直接训练运行即可），但是大家肯定想自己修改到自己的项目里如果你修改过程中的报错，我已经提供很完整的教程了（多种方案给大家选择），所以报错回复我只能是随缘回复（因为本文的内容肯定大家一堆报错会遇到稍微操作不当就是报错），同时本项目仅用于YOLOv8项目上，和本项目无关的报错一律不回复。
 
 * * *
 
@@ -257,7 +266,7 @@ class FeatureLoss(nn.Module):
 
 * * *
 
-### 2.2 修改二
+### 2.2 修改二（注意看此处，和之前的文章不一样）
 
 下面的代码我们找到文件'ultralytics/engine/trainer.py'按照我的图片内容复制粘贴到指定位置即可！**根据下图进行修改->**
 
@@ -270,11 +279,9 @@ from ultralytics.utils import IterableSimpleNamespace
 from ultralytics.utils.AddLoss import get_fpn_features, Distill_LogitLoss, de_parallel, get_channels, FeatureLoss
 ```
 
-
-
-
-
 ![](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/9e0dd4f62fb8bc7cf0d58207febd24d2.png)​
+
+**本文说的在线蒸馏！！！注意就是在此处我们将下面的self.distillonline设置为True即可，如果为False则用的是离线蒸馏，除此之外本文和之前的文章无任何区别！！** 
 
 ```python
         #------------------------------Add-Param-Start---------------
@@ -284,7 +291,7 @@ from ultralytics.utils.AddLoss import get_fpn_features, Distill_LogitLoss, de_pa
         self.distillloss =None
         self.model_t = overrides.get("model_t", None)
         self.distill_feat_type = "cwd"  # "cwd","mgd","mimic"
-        self.distillonline = False  # False or True
+        self.distillonline = True  # False or True
         self.logit_loss = False # False or True
         self.distill_layers = [2, 4, 6, 8, 12, 15, 18, 21]
         # ------------------------------Add-Param-End-----------------
@@ -318,15 +325,13 @@ from ultralytics.utils.AddLoss import get_fpn_features, Distill_LogitLoss, de_pa
                 self.model_t = nn.parallel.DistributedDataParallel(self.model_t, device_ids=[RANK])
 ```
 
-
-
 * * *
 
 ### 2.5 修改五 
 
 此处的修改和上面有些不一样，上面的代码都是添加，此处的代码为替换。
 
-```
+```python
         self.optimizer = self.build_optimizer(model=self.model,
                                               model_t=self.model_t,
                                               distillloss=self.distillloss,
@@ -364,11 +369,11 @@ from ultralytics.utils.AddLoss import get_fpn_features, Distill_LogitLoss, de_pa
 **修改教程看图片！**
 
 ```python
-            if self.model_t is not None:
+            if self.model_t is not None: 
                 self.model_t.eval()
 ```
 
-![](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/ce70466a6fecf9192f58f54e010a35ed.png)​
+![](https://i-blog.csdnimg.cn/blog_migrate/ce70466a6fecf9192f58f54e010a35ed.png)​
 
 * * *
 
@@ -376,12 +381,10 @@ from ultralytics.utils.AddLoss import get_fpn_features, Distill_LogitLoss, de_pa
 
 **修改教程看图片！**
 
-```
+```python
                     pred_s= self.model(batch['img'])
                     stu_features = get_fpn_features(batch['img'], self.model,fpn_layers=self.distill_layers)
 ```
-
-
 
 ![](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/396a0574ac2a105925cb7de38aa6b875.png)
 
@@ -391,7 +394,9 @@ from ultralytics.utils.AddLoss import get_fpn_features, Distill_LogitLoss, de_pa
 
 ![](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/f824b6a1d28753225a30708809dfc7a0.png)​
 
-```
+​     
+
+```python
                     if self.model_t is not None:
                         distill_weight = ((1 - math.cos(i * math.pi / len(self.train_loader))) / 2) * (0.1 - 1) + 1
                         with torch.no_grad():
@@ -436,7 +441,7 @@ from ultralytics.utils.AddLoss import get_fpn_features, Distill_LogitLoss, de_pa
 
 ![](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/34fb82b4b0a045659a84dc210597c2c9.png)​
 
-```
+```python
                 mem = f"{torch.cuda.memory_reserved() / 1E9 if torch.cuda.is_available() else 0:.3g}G"  # (GB)
                 loss_len = self.tloss.shape[0] if len(self.tloss.shape) else 1
                 losses = self.tloss if loss_len > 1 else torch.unsqueeze(self.tloss, 0)
@@ -450,15 +455,13 @@ from ultralytics.utils.AddLoss import get_fpn_features, Distill_LogitLoss, de_pa
                         self.plot_training_samples(batch, ni)
 ```
 
-
-
 * * *
 
 ### 2.10 修改十一
 
 **修改教程看图片！**
 
-```cobol
+```python
 , model_t, distillloss, distillonline=False,
 ```
 
@@ -470,7 +473,7 @@ from ultralytics.utils.AddLoss import get_fpn_features, Distill_LogitLoss, de_pa
 
 **修改教程看图片！**
 
-```
+```python
         if model_t is not None and distillonline:
             for v in model_t.modules():
                 # print(v)
@@ -512,7 +515,7 @@ PS：注意此处我们更换了修改的文件了！！
 
 我们找到文件'ultralytics/models/[yolo](https://so.csdn.net/so/search?q=yolo&spm=1001.2101.3001.7020)/detect/train.py'按照图片进行修改即可！
 
-```
+```python
         return ('\n' + '%12s' *
                 (7 + len(self.loss_names))) % (
         'Epoch', 'GPU_mem', *self.loss_names, 'dfeaLoss', 'dlineLoss', 'dlogitLoss', 'Instances',
@@ -545,7 +548,7 @@ PS：注意此处我们更换了修改的文件了！！
 
 PS：需要注意的是，学生模型和教师模型的模型配置文件需要保持一致，也就是说你学生模型假设用了BiFPN那么你的教师模型也需要用BiFPN去训练否则就会报错！
 
-```
+```python
 import warnings
 warnings.filterwarnings('ignore')
 from ultralytics import YOLO
@@ -574,8 +577,6 @@ if __name__ == '__main__':
                 )
 ```
 
-
-
 * * *
 
 ### 3.2 开始蒸馏 
@@ -586,5 +587,4 @@ if __name__ == '__main__':
 
 我们运行蒸馏的py文件即可，模型就会开始训练并且蒸馏。下面的图片就是模型开始训练并且蒸馏，可以看到我们开启了蒸馏损失'dfeaLoss   dlineLoss'
 
-![](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/339ee686982c2e83b90cfd85e2890948.png)​ 
-
+![](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/339ee686982c2e83b90cfd85e2890948.png)​
