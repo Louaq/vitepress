@@ -91,20 +91,20 @@ const blogTheme = getThemeConfig({
   ],
 
   // 公告
-  popover: {
-    title: '资料源码',
-    body: [
-      {
-        type: 'button',
-        content: '点击下载',
-        props: {
-          type: 'success'
-        },
-        link: 'https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/YOLOv8.2.zip',
-      }
-    ],
-    duration: 0
-  },
+  //popover: {
+    //title: '资料源码',
+    //body: [
+      //{
+        //type: 'button',
+        //content: '点击下载',
+        //props: {
+          //type: 'success'
+        //},
+        //link: 'https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/YOLOv8.2.zip',
+      //}
+    //],
+    //duration: 0
+  //},
 })
 
 export { blogTheme }
